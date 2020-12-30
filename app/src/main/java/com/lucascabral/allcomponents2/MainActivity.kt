@@ -5,24 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnItemSelectedListener
+, SeekBar.OnSeekBarChangeListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        button_toast.setOnClickListener(this)
-        button_snackBar.setOnClickListener(this)
-        button_get_spinner.setOnClickListener(this)
-        button_set_spinner.setOnClickListener(this)
+        setListeners()
 
         spinner_static.onItemSelectedListener = this
+        seekBar.setOnSeekBarChangeListener(this)
 
         loadSpinner()
     }
@@ -66,13 +62,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
             R.id.button_set_spinner -> {
                 spinner_static.setSelection(2)
             }
+
+            R.id.button_get_seekBar -> {
+                toast("SeekBar: ${seekBar.progress}")
+            }
+            R.id.button_set_seekBar -> {
+                seekBar.progress = 20
+            }
         }
+    }
+
+    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+        seekBar_value.text = "Valor seekBar: $progress"
+    }
+
+    override fun onStartTrackingTouch(seekBar: SeekBar?) {
+        toast("Track Started")
+    }
+
+    override fun onStopTrackingTouch(seekBar: SeekBar?) {
+        toast("Track Stoped")
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when(parent?.id) {
             R.id.spinner_static -> {
-                toast(parent?.getItemAtPosition(position).toString())
+                toast(parent.getItemAtPosition(position).toString())
             }
         }
     }
@@ -89,5 +104,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         val mList = listOf("Km", "M", "Cm", "Mm")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, mList)
         spinner_dynamic.adapter = adapter
+    }
+
+    private fun setListeners() {
+        button_toast.setOnClickListener(this)
+        button_snackBar.setOnClickListener(this)
+
+        button_get_spinner.setOnClickListener(this)
+        button_set_spinner.setOnClickListener(this)
+
+        button_get_seekBar.setOnClickListener(this)
+        button_set_seekBar.setOnClickListener(this)
     }
 }
