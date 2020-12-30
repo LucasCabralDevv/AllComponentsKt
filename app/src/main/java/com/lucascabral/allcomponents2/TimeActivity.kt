@@ -41,6 +41,9 @@ class TimeActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
                 DatePickerDialog(this, this, year, month, day).show()
             }
             R.id.button_get_time -> {
+
+                progressBar.visibility = View.GONE
+
                 if (Build.VERSION.SDK_INT >= 23) {
                     val hour = time_picker.hour
                     val minute = time_picker.minute
