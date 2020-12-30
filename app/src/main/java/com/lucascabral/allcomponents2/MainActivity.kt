@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
         seekBar.setOnSeekBarChangeListener(this)
 
         switch_main.setOnCheckedChangeListener(this)
+        check_main.setOnCheckedChangeListener(this)
 
         loadSpinner()
     }
@@ -81,6 +82,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, AdapterView.OnIt
             R.id.switch_main -> {
                 toast("Switch: ${if (isChecked) "true" else "false"}")
                 //switch_main.isChecked = true
+            }
+            R.id.check_main -> {
+                toast("CheckBox: ${if (isChecked) "true" else "false"}")
+                //check_main.isChecked = true
             }
         }
     }
