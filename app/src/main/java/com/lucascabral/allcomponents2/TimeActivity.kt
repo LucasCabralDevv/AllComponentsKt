@@ -1,16 +1,20 @@
 package com.lucascabral.allcomponents2
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.DatePicker
+import android.widget.TimePicker
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_time.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TimeActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog.OnDateSetListener {
+class TimeActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog.OnDateSetListener,
+        TimePicker.OnTimeChangedListener {
 
     private val mSimpleDate = SimpleDateFormat("dd/MM/yyyy")
 
@@ -19,10 +23,14 @@ class TimeActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
         setContentView(R.layout.activity_time)
 
         button_date.setOnClickListener(this)
+        button_get_time.setOnClickListener(this)
+        button_set_time.setOnClickListener(this)
+
+        time_picker.setOnTimeChangedListener(this)
     }
 
     override fun onClick(v: View) {
-        when(v.id) {
+        when (v.id) {
             R.id.button_date -> {
 
                 val calendar = Calendar.getInstance()
@@ -32,7 +40,31 @@ class TimeActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
 
                 DatePickerDialog(this, this, year, month, day).show()
             }
+            R.id.button_get_time -> {
+                if (Build.VERSION.SDK_INT >= 23) {
+                    val hour = time_picker.hour
+                    val minute = time_picker.minute
+                    toast("$hour:$minute")
+                } else {
+                    val hour = time_picker.currentHour
+                    val minute = time_picker.currentMinute
+                    toast("$hour:$minute")
+                }
+            }
+            R.id.button_set_time -> {
+                if (Build.VERSION.SDK_INT >= 23) {
+                    time_picker.hour = 18
+                    time_picker.minute = 15
+                } else {
+                    time_picker.currentHour = 18
+                    time_picker.currentMinute = 15
+                }
+            }
         }
+    }
+
+    override fun onTimeChanged(view: TimePicker?, hourOfDay: Int, minute: Int) {
+        toast("$hourOfDay:$minute")
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
