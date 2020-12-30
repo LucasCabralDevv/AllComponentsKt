@@ -4,24 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linear_root"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/button_toast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Toast ME"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:text="Toast ME" />
 
     <Button
         android:id="@+id/button_snackBar"
-        android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Snack ME"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="Snack ME" />
+
+    <Spinner
+        android:id="@+id/spinner_static"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:entries="@array/spinner_values" />
+
+    <Spinner
+        android:id="@+id/spinner_dynamic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+
+    <LinearLayout
+        android:id="@+id/linear_button_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_get_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="Obter Spinner" />
+
+        <Button
+            android:id="@+id/button_set_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Atribuir Snipper" />
+
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:max="50" />
 
 </LinearLayout>

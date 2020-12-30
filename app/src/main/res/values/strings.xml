@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">All Components2</string>
+
+    <string-array name="spinner_values">
+        <item>Km</item>
+        <item>M</item>
+        <item>Cm</item>
+        <item>Mm</item>
+    </string-array>
+
 </resources>
